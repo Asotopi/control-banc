@@ -25,11 +25,11 @@
       '<rect x="53" y="34" width="5" height="4" rx="2" fill="#fff3e8"/>' +
       '<circle cx="19" cy="47" r="7.5" fill="#d4713a"/><circle cx="19" cy="47" r="3" fill="#fde5cf"/><circle cx="46" cy="47" r="7.5" fill="#d4713a"/><circle cx="46" cy="47" r="3" fill="#fde5cf"/></svg>',
     vacances: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="52" cy="12" r="7" fill="#c9b3f0"/>' +
-      '<ellipse cx="32" cy="55" rx="23" ry="5" fill="#d5c5f2"/>' +
-      '<rect x="30.5" y="24" width="3" height="31" rx="1.5" fill="#8d6fc4"/>' +
+      '<ellipse cx="32" cy="50" rx="21" ry="4.5" fill="#d5c5f2"/>' +
+      '<rect x="30.5" y="24" width="3" height="26" rx="1.5" fill="#8d6fc4"/>' +
       '<path d="M8 29 A24 22 0 0 1 56 29 Z" fill="#b79ae6"/>' +
       '<path d="M32 7 C26 13 24 21 24 29 H40 C40 21 38 13 32 7 Z" fill="#d9c9f5"/>' +
-      '<path d="M5 61 q6.5-5 13 0 t13 0 t13 0 t13 0" stroke="#9c80d8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+      '<path d="M8 56 q6-4.5 12 0 t12 0 t12 0 t12 0" stroke="#9c80d8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
     estalvis: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="11" r="8" fill="#4fb585"/><circle cx="32" cy="11" r="4.5" fill="#b5e8cf"/>' +
       '<ellipse cx="31" cy="38" rx="22" ry="17" fill="#8fd9b4"/>' +
       '<rect x="16" y="49" width="8" height="10" rx="3.5" fill="#62c196"/><rect x="38" y="49" width="8" height="10" rx="3.5" fill="#62c196"/>' +
