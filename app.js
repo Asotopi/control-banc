@@ -15,9 +15,9 @@
 
   // ---------- Ilustraciones pastel (propias, planas y sin contornos) ----------
   var DIBUJOS = {
-    casa: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="42" y="12" width="8" height="14" rx="2" fill="#e9a948"/>' +
-      '<rect x="12" y="28" width="40" height="28" rx="4" fill="#f7d681"/>' +
-      '<path d="M32 9 L6 31 H58 Z" fill="#e9a948" stroke="#e9a948" stroke-width="5" stroke-linejoin="round"/>' +
+    casa: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="42" y="12" width="8" height="14" rx="2" fill="#f0c24a"/>' +
+      '<rect x="12" y="28" width="40" height="28" rx="4" fill="#f8e08a"/>' +
+      '<path d="M32 9 L6 31 H58 Z" fill="#f0c24a" stroke="#f0c24a" stroke-width="5" stroke-linejoin="round"/>' +
       '<rect x="27" y="39" width="10" height="17" rx="3" fill="#fff"/><rect x="15" y="36" width="9" height="9" rx="2.5" fill="#fff"/><rect x="40" y="36" width="9" height="9" rx="2.5" fill="#fff"/></svg>',
     cotxe: '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M15 33 L22 20 Q23.5 17 27 17 H40 Q43.5 17 45.4 20 L53 33 Z" fill="#f0955a"/>' +
       '<rect x="5" y="30" width="54" height="17" rx="7" fill="#f0955a"/>' +
@@ -31,12 +31,12 @@
       '<path d="M32 7 C26 13 24 21 24 29 H40 C40 21 38 13 32 7 Z" fill="#d9c9f5"/>' +
       '<path d="M5 61 q6.5-5 13 0 t13 0 t13 0 t13 0" stroke="#9fc3ee" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
     estalvis: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="11" r="8" fill="#ffd878"/><circle cx="32" cy="11" r="4.5" fill="#fff0b8"/>' +
-      '<ellipse cx="31" cy="38" rx="22" ry="17" fill="#f6b3c0"/>' +
-      '<rect x="16" y="49" width="8" height="10" rx="3.5" fill="#ee94a8"/><rect x="38" y="49" width="8" height="10" rx="3.5" fill="#ee94a8"/>' +
-      '<path d="M37 25 L45 16 L48 28 Z" fill="#ee94a8" stroke="#ee94a8" stroke-width="2" stroke-linejoin="round"/>' +
-      '<ellipse cx="53" cy="39" rx="6.5" ry="5.5" fill="#ee94a8"/><circle cx="51.2" cy="39" r="1.2" fill="#c8697f"/><circle cx="55" cy="39" r="1.2" fill="#c8697f"/>' +
-      '<circle cx="43" cy="33" r="2.1" fill="#5a3b45"/><rect x="23" y="22" width="13" height="3" rx="1.5" fill="#d9788f"/>' +
-      '<path d="M9.5 37 q-6-2-4.5-8" stroke="#ee94a8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>'
+      '<ellipse cx="31" cy="38" rx="22" ry="17" fill="#8fd9b4"/>' +
+      '<rect x="16" y="49" width="8" height="10" rx="3.5" fill="#62c196"/><rect x="38" y="49" width="8" height="10" rx="3.5" fill="#62c196"/>' +
+      '<path d="M37 25 L45 16 L48 28 Z" fill="#62c196" stroke="#62c196" stroke-width="2" stroke-linejoin="round"/>' +
+      '<ellipse cx="53" cy="39" rx="6.5" ry="5.5" fill="#62c196"/><circle cx="51.2" cy="39" r="1.2" fill="#3f9a73"/><circle cx="55" cy="39" r="1.2" fill="#3f9a73"/>' +
+      '<circle cx="43" cy="33" r="2.1" fill="#2f5d49"/><rect x="23" y="22" width="13" height="3" rx="1.5" fill="#3f9a73"/>' +
+      '<path d="M9.5 37 q-6-2-4.5-8" stroke="#62c196" stroke-width="3" fill="none" stroke-linecap="round"/></svg>'
   };
 
   // ---------- Qué tarjetas se muestran ----------
