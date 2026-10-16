@@ -1,5 +1,5 @@
 /* Modo sin conexiÃ³n: guarda los archivos de la app y los sirve aunque no haya Internet. */
-const VERSION = 'controlbanc-v7';
+const VERSION = 'controlbanc-v8';
 const ARCHIVOS = ['./', 'index.html', 'logic.js', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png',
   'fonts/quicksand-latin-d8da43.woff2', 'fonts/quicksand-latin-ext-9d611e.woff2'];
 
