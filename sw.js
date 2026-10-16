@@ -1,5 +1,5 @@
-/* Modo sin conexión: guarda los archivos de la app y los sirve aunque no haya Internet. */
-const VERSION = 'controlbanc-v5';
+/* Modo sin conexiÃ³n: guarda los archivos de la app y los sirve aunque no haya Internet. */
+const VERSION = 'controlbanc-v6';
 const ARCHIVOS = ['./', 'index.html', 'logic.js', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png',
   'fonts/quicksand-latin-d8da43.woff2', 'fonts/quicksand-latin-ext-9d611e.woff2'];
 
@@ -14,7 +14,7 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Primero la copia guardada (rápido y sin red); en segundo plano se actualiza para la próxima vez
+// Primero la copia guardada (rÃ¡pido y sin red); en segundo plano se actualiza para la prÃ³xima vez
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET' || new URL(e.request.url).origin !== location.origin) { return; }
   e.respondWith(

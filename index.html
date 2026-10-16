@@ -54,6 +54,11 @@
   .targeta { container-type:size; min-height:0; border-radius:var(--radi); padding:10px 12px 10px;
     display:flex; flex-direction:column; justify-content:space-between; gap:4px; }
   .targeta.ample { grid-column:1 / -1; }
+  .targeta { position:relative; }
+  /* Ilustración pastel arriba a la derecha de cada reserva; su tamaño sigue al de la tarjeta */
+  .dibuix { position:absolute; top:clamp(6px, 3.5cqw, 12px); right:clamp(8px, 4.5cqw, 14px); width:clamp(30px, 27cqw, 58px); aspect-ratio:1; pointer-events:none; }
+  .dibuix svg { display:block; width:100%; height:100%; }
+  .titol { white-space:nowrap; }
   .titol { font-weight:700; font-size:clamp(12px, 8.5cqw, 15px); letter-spacing:.8px; text-transform:uppercase; }
   .saldo { text-align:center; font-weight:700; line-height:1; color:var(--text); font-variant-numeric:tabular-nums;
     font-size:clamp(16px, 13.5cqw, 30px); }

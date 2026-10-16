@@ -13,14 +13,40 @@
   };
   function icono(nombre) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[nombre] + '</svg>'; }
 
+  // ---------- Ilustraciones pastel (propias, planas y sin contornos) ----------
+  var DIBUJOS = {
+    casa: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="42" y="12" width="8" height="14" rx="2" fill="#e9a948"/>' +
+      '<rect x="12" y="28" width="40" height="28" rx="4" fill="#f7d681"/>' +
+      '<path d="M32 9 L6 31 H58 Z" fill="#e9a948" stroke="#e9a948" stroke-width="5" stroke-linejoin="round"/>' +
+      '<rect x="27" y="39" width="10" height="17" rx="3" fill="#fff"/><rect x="15" y="36" width="9" height="9" rx="2.5" fill="#fff"/><rect x="40" y="36" width="9" height="9" rx="2.5" fill="#fff"/></svg>',
+    cotxe: '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M15 33 L22 20 Q23.5 17 27 17 H40 Q43.5 17 45.4 20 L53 33 Z" fill="#f0955a"/>' +
+      '<rect x="5" y="30" width="54" height="17" rx="7" fill="#f0955a"/>' +
+      '<path d="M21.5 30 L26.5 20.5 H31.5 V30 Z" fill="#fff3e8"/><path d="M35 30 V20.5 H40 Q41.3 20.5 42 21.6 L47.5 30 Z" fill="#fff3e8"/>' +
+      '<rect x="53" y="34" width="5" height="4" rx="2" fill="#fff3e8"/>' +
+      '<circle cx="19" cy="47" r="7.5" fill="#b86a3a"/><circle cx="19" cy="47" r="3" fill="#fde5cf"/><circle cx="46" cy="47" r="7.5" fill="#b86a3a"/><circle cx="46" cy="47" r="3" fill="#fde5cf"/></svg>',
+    vacances: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="52" cy="12" r="7" fill="#ffd47a"/>' +
+      '<ellipse cx="32" cy="55" rx="23" ry="5" fill="#f5deaa"/>' +
+      '<rect x="30.5" y="24" width="3" height="31" rx="1.5" fill="#8d6fc4"/>' +
+      '<path d="M8 29 A24 22 0 0 1 56 29 Z" fill="#b79ae6"/>' +
+      '<path d="M32 7 C26 13 24 21 24 29 H40 C40 21 38 13 32 7 Z" fill="#d9c9f5"/>' +
+      '<path d="M5 61 q6.5-5 13 0 t13 0 t13 0 t13 0" stroke="#9fc3ee" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+    estalvis: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="11" r="8" fill="#ffd878"/><circle cx="32" cy="11" r="4.5" fill="#fff0b8"/>' +
+      '<ellipse cx="31" cy="38" rx="22" ry="17" fill="#f6b3c0"/>' +
+      '<rect x="16" y="49" width="8" height="10" rx="3.5" fill="#ee94a8"/><rect x="38" y="49" width="8" height="10" rx="3.5" fill="#ee94a8"/>' +
+      '<path d="M37 25 L45 16 L48 28 Z" fill="#ee94a8" stroke="#ee94a8" stroke-width="2" stroke-linejoin="round"/>' +
+      '<ellipse cx="53" cy="39" rx="6.5" ry="5.5" fill="#ee94a8"/><circle cx="51.2" cy="39" r="1.2" fill="#c8697f"/><circle cx="55" cy="39" r="1.2" fill="#c8697f"/>' +
+      '<circle cx="43" cy="33" r="2.1" fill="#5a3b45"/><rect x="23" y="22" width="13" height="3" rx="1.5" fill="#d9788f"/>' +
+      '<path d="M9.5 37 q-6-2-4.5-8" stroke="#ee94a8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>'
+  };
+
   // ---------- Qué tarjetas se muestran ----------
   // acciones: [nombre de la macro, icono, etiqueta]. Las cuatro reservas son idénticas (↻ + importe mensual ℹ).
   // BBVA, BBVA-ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche siguen en los datos pero no se muestran.
   var TARJETAS = [
-    { id: 'casa', titulo: 'CASA', clase: 'c-casa', saldo: 'casa', acciones: [['ResetCasa', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCasa', 'casa'] },
-    { id: 'cotxe', titulo: 'COTXE', clase: 'c-cotxe', saldo: 'cotxe', acciones: [['ResetCotxeSeguro', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCotxeSeguro', 'cotxe'] },
-    { id: 'vacances', titulo: 'VACANCES', clase: 'c-vacances', saldo: 'vacances', acciones: [['ResetVacances', 'refresh', 'Actualitzar saldo']], mensual: ['InfoVacances', 'vacances'] },
-    { id: 'estalvis', titulo: 'ESTALVIS', clase: 'c-estalvis', saldo: 'ahorros', acciones: [['ResetAhorros', 'refresh', 'Actualitzar saldo']], mensual: ['InfoAhorros', 'ahorros'] },
+    { id: 'casa', titulo: 'CASA', dibujo: 'casa', clase: 'c-casa', saldo: 'casa', acciones: [['ResetCasa', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCasa', 'casa'] },
+    { id: 'cotxe', titulo: 'COTXE', dibujo: 'cotxe', clase: 'c-cotxe', saldo: 'cotxe', acciones: [['ResetCotxeSeguro', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCotxeSeguro', 'cotxe'] },
+    { id: 'vacances', titulo: 'VACANCES', dibujo: 'vacances', clase: 'c-vacances', saldo: 'vacances', acciones: [['ResetVacances', 'refresh', 'Actualitzar saldo']], mensual: ['InfoVacances', 'vacances'] },
+    { id: 'estalvis', titulo: 'ESTALVIS', dibujo: 'estalvis', clase: 'c-estalvis', saldo: 'ahorros', acciones: [['ResetAhorros', 'refresh', 'Actualitzar saldo']], mensual: ['InfoAhorros', 'ahorros'] },
     { id: 'prestec', tipo: 'prestec', titulo: 'PRÉSTEC', clase: 'c-prestec ample', acciones: [['Amortitzar', 'monedes', 'Amortitzar préstec']], mensual: ['InfoPrestec', 'prestec'] }
   ];
 
@@ -68,6 +94,7 @@
     }
     var s = v[t.saldo];
     return '<section class="targeta ' + t.clase + '"><div class="titol">' + esc(t.titulo) + '</div>' +
+      (t.dibujo ? '<div class="dibuix">' + DIBUJOS[t.dibujo] + '</div>' : '') +
       '<div class="saldo' + (s < 0 ? ' neg' : '') + '">' + esc(L.moneda(s)) + '</div>' + filaInferior(t, v) + '</section>';
   }
   function pintar() {
