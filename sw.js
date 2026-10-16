@@ -1,5 +1,5 @@
 /* Modo sin conexión: guarda los archivos de la app y los sirve aunque no haya Internet. */
-const VERSION = 'controlbanc-v1';
+const VERSION = 'controlbanc-v2';
 const ARCHIVOS = ['./', 'index.html', 'logic.js', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

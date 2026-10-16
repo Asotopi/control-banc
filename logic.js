@@ -38,11 +38,15 @@
     InfoIBI: info('B19'),
     InfoCotxeSeguro: info('B20'),
     InfoCotxeRevisio: info('B21'),
-    InfoVacances: info('B22')
+    InfoVacances: info('B22'),
+    // ESTALVIS (nuevo, no existe en el Excel): acumulado en B23, importe mensual en B24, saldo base en K32
+    SumaAhorros: { tipo: 'suma', datos: 'B23', msg: 'Afegeix Estalvis' },
+    ResetAhorros: reset('B23', 'K32'),
+    InfoAhorros: info('B24')
   };
 
-  var CELDAS_DATOS = ['B1', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B15', 'B16', 'B17', 'B18', 'B19', 'B20', 'B21', 'B22'];
-  var CELDAS_DASH = ['E7', 'E20', 'H11', 'H20', 'K4', 'K7', 'K11', 'K18', 'K25'];
+  var CELDAS_DATOS = ['B1', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B15', 'B16', 'B17', 'B18', 'B19', 'B20', 'B21', 'B22', 'B23', 'B24'];
+  var CELDAS_DASH = ['E7', 'E20', 'H11', 'H20', 'K4', 'K7', 'K11', 'K18', 'K25', 'K32'];
 
   function estadoInicial() {
     var s = { datos: {}, dash: {}, prestecTotal: 20000 };
@@ -75,11 +79,12 @@
     switch (a.tipo) {
       case 'mes':   // Sub BotonMes
         var b1 = num(D.B1), b3 = num(D.B3);
-        var destino = [['B5', 'B15'], ['B6', 'B16'], ['B12', 'B17'], ['B7', 'B18'], ['B8', 'B19'], ['B9', 'B20'], ['B10', 'B21'], ['B11', 'B22']];
+        // El último par (B23 += B24) es el ahorro nuevo; los anteriores son idénticos al Excel
+        var destino = [['B5', 'B15'], ['B6', 'B16'], ['B12', 'B17'], ['B7', 'B18'], ['B8', 'B19'], ['B9', 'B20'], ['B10', 'B21'], ['B11', 'B22'], ['B23', 'B24']];
         var nuevos = destino.map(function (p) { return [p[0], num(D[p[0]]) + num(D[p[1]])]; });
         D.B1 = b1 + 1;
         nuevos.forEach(function (p) { D[p[0]] = p[1]; });
-        D.B3 = b3 - num(D.B15) - num(D.B16) - num(D.B17) - num(D.B18) - num(D.B19) - num(D.B20) - num(D.B21) - num(D.B22);
+        D.B3 = b3 - num(D.B15) - num(D.B16) - num(D.B17) - num(D.B18) - num(D.B19) - num(D.B20) - num(D.B21) - num(D.B22) - num(D.B24);
         break;
       case 'reset': // ResetAmbInput: DATOS!celda = 0 y DASHBOARD!celda = valor
         if (valor !== null) { D[a.datos] = 0; S[a.dashboard] = valor; }
@@ -115,10 +120,11 @@
       cotxe: n(S.K11) + n(D.B9),
       revisio: n(S.K18) + n(D.B10),
       vacances: n(S.K25) + n(D.B11),
+      ahorros: n(S.K32) + n(D.B23),
       prestecPagado: n(D.B12),
       prestecRestante: restante,
       prestecPorcentaje: 1 - restante / total,
-      importes: { sabadell: n(D.B15), openbank: n(D.B16), prestec: n(D.B17), casa: n(D.B18), ibi: n(D.B19), cotxe: n(D.B20), revisio: n(D.B21), vacances: n(D.B22) }
+      importes: { sabadell: n(D.B15), openbank: n(D.B16), prestec: n(D.B17), casa: n(D.B18), ibi: n(D.B19), cotxe: n(D.B20), revisio: n(D.B21), vacances: n(D.B22), ahorros: n(D.B24) }
     };
   }
 

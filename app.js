@@ -17,23 +17,16 @@
 
   // ---------- Qué tarjetas se muestran ----------
   // acciones: [nombre de la macro, icono, clase, etiqueta]
-  var BBVA = '#156082';
+  // Solo se muestran estas cinco. BBVA, BBVA-ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche
+  // siguen existiendo en los datos (no se pierde nada) pero ya no aparecen.
   var TARJETAS = [
-    { seccion: 'Comptes' },
-    { id: 'bbva', titulo: 'BBVA', color: BBVA, saldo: 'bbva', acciones: [['SumaBBVA', 'plus', 'mes-mes', 'Afegir saldo'], ['RestaBBVA', 'minus', 'menys', 'Restar saldo'], ['ResetBBVA', 'refresh', 'refresca', 'Actualitzar saldo']] },
-    { id: 'estalvis', titulo: 'BBVA - ESTALVIS', color: BBVA, saldo: 'estalvis', acciones: [['SumaEstalvis', 'plus', 'mes-mes', 'Afegir estalvis'], ['ResetEstalvis', 'refresh', 'refresca', 'Actualitzar saldo']] },
-    { id: 'sabadell', titulo: 'BANC SABADELL', color: '#4E95D9', saldo: 'sabadell', acciones: [['ResetSabadell', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoSabadell', 'sabadell'] },
-    { id: 'openbank', titulo: 'OPENBANK', color: '#404040', saldo: 'openbank', acciones: [['ResetOpenbank', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoOpenbank', 'openbank'] },
     { seccion: 'Reserves' },
     { id: 'casa', titulo: 'CASA', color: '#B5A52F', saldo: 'casa', acciones: [['ResetCasa', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoCasa', 'casa'] },
     { id: 'cotxe', titulo: 'COTXE', color: '#C9784A', saldo: 'cotxe', acciones: [['ResetCotxeSeguro', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoCotxeSeguro', 'cotxe'] },
     { id: 'vacances', titulo: 'VACANCES', color: '#9F6BA8', saldo: 'vacances', acciones: [['ResetVacances', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoVacances', 'vacances'] },
+    { id: 'estalvis', titulo: 'ESTALVIS', color: '#2E8B57', saldo: 'ahorros', acciones: [['SumaAhorros', 'plus', 'mes-mes', 'Afegir estalvis'], ['ResetAhorros', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoAhorros', 'ahorros'] },
     { seccion: 'Préstec' },
     { id: 'prestec', tipo: 'prestec', color: '#747474', acciones: [['Amortitzar', 'monedes', 'monedes', 'Amortitzar préstec']], mensual: ['InfoPrestec', 'prestec'] }
-  ];
-  var EXTRAS = [
-    { id: 'ibi', titulo: 'IBI + BASURES', color: '#747474', saldo: 'ibi', acciones: [['ResetIBI', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoIBI', 'ibi'] },
-    { id: 'revisio', titulo: 'REVISIÓ COTXE', color: '#747474', saldo: 'revisio', acciones: [['ResetCotxeRevisio', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoCotxeRevisio', 'revisio'] }
   ];
 
   // ---------- Estado y almacenamiento ----------
@@ -88,7 +81,6 @@
     el('titolMes').textContent = v.titulo;
     var h = '';
     TARJETAS.forEach(function (t) { h += t.seccion ? '<h2 class="seccio">' + t.seccion + '</h2>' : tarjeta(t, v); });
-    h += '<details><summary>Altres</summary><div class="dins">' + EXTRAS.map(function (t) { return tarjeta(t, v); }).join('') + '</div></details>';
     el('panell').innerHTML = h;
     el('btnDesfer').style.opacity = datos.historial.length ? 1 : .4;
   }
@@ -126,8 +118,17 @@
   }
 
   // ---------- Operaciones ----------
+  // Texto legible de cada acción para los avisos: «ESTALVIS · Actualitzar saldo»
+  var NOMBRES = {};
+  TARJETAS.forEach(function (t) {
+    if (!t.acciones) { return; }
+    var titulo = t.titulo || 'PRÉSTEC';
+    t.acciones.forEach(function (a) { NOMBRES[a[0]] = titulo + ' · ' + a[3]; });
+    if (t.mensual) { NOMBRES[t.mensual[0]] = titulo + ' · import mensual'; }
+  });
   function etiqueta(nombre, valor) {
-    return nombre === 'BotonMes' ? 'Mes següent' : nombre + (valor === null || valor === undefined ? '' : ' ' + L.moneda(valor));
+    var base = nombre === 'BotonMes' ? 'Mes següent' : (NOMBRES[nombre] || nombre);
+    return base + (valor === null || valor === undefined ? '' : ' ' + L.moneda(valor));
   }
   function ejecutar(nombre, valor) {
     var antes = datos.estado;
@@ -238,6 +239,12 @@
 
   // Funcionamiento sin conexión
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    var teniaControlador = !!navigator.serviceWorker.controller;
+    var recargado = false;
+    // Cuando se publica una versión nueva, la app se recarga sola una vez para usarla (no en la primera instalación)
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (teniaControlador && !recargado) { recargado = true; location.reload(); }
+    });
     navigator.serviceWorker.register('sw.js').catch(function () { /* sin modo offline: la app sigue funcionando */ });
   }
 })();

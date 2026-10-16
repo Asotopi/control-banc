@@ -1,7 +1,12 @@
 # Control Banc (app para el móvil)
 
-Reproduce tu Excel **CONTROL - BANC**: saldos de BBVA, ahorros, Sabadell, Openbank, Casa, Cotxe, Vacances,
-el préstamo de 20.000 €, las mensualidades y el botón de pasar de mes. **Los datos viven solo en tu móvil.**
+Basada en tu Excel **CONTROL - BANC**. Muestra cinco tarjetas: **CASA, COTXE, VACANCES, ESTALVIS** y el
+**PRESTEC de 20.000 €**, con sus importes mensuales y el botón de pasar de mes. **Los datos viven solo en tu móvil.**
+
+- **ESTALVIS** es nuevo (no está en el Excel): empieza en 0, tiene botón **+** y **↻** y un importe mensual que se
+  suma solo al pasar de mes.
+- BBVA, BBVA - ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche ya **no se muestran**. Sus datos siguen
+  guardados por dentro (no se pierde nada), pero no se pueden ver ni editar desde la app.
 
 | Archivo | Para qué |
 |---|---|
