@@ -37,20 +37,21 @@
     padding:calc(10px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom)); }
 
   .barra { display:flex; gap:8px; align-items:stretch; flex:none; }
-  .mes { flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer;
-    background:var(--panel); border:1px solid var(--vora); border-radius:var(--radi); padding:8px 8px 8px 16px; text-align:left; }
+  .mes { border:0; flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer;
+    background:var(--panel); border-radius:var(--radi); padding:8px 8px 8px 16px; text-align:left; }
   .mes:active { background:var(--panel-fort); }
   .mes .nom { font-weight:700; font-size:clamp(17px, 5.4vw, 22px); letter-spacing:.3px; color:var(--blau-titol); line-height:1.1; }
   .mes small { display:block; font-weight:500; color:var(--suau); font-size:11.5px; margin-top:1px; }
-  .mes .fletxa { flex:none; width:38px; height:38px; border-radius:12px; background:var(--primari); display:grid; place-items:center; }
-  .mes .fletxa svg { width:22px; height:22px; fill:#fff; }
-  .icona-cap { flex:none; width:48px; border-radius:var(--radi); border:1px solid var(--vora); background:var(--panel); display:grid; place-items:center; cursor:pointer; }
+  .mes .fletxa { flex:none; width:38px; height:38px; border-radius:12px; background:#d3e4fb; display:grid; place-items:center; }
+  .mes .fletxa svg { width:22px; height:22px; fill:var(--primari); }
+  .mes:active .fletxa { background:#c2d8f8; }
+  .icona-cap { border:0; flex:none; width:48px; border-radius:var(--radi); background:var(--panel); display:grid; place-items:center; cursor:pointer; }
   .icona-cap:active { background:var(--panel-fort); }
   .icona-cap svg { width:22px; height:22px; fill:var(--blau-titol); }
 
   /* Cuadrícula: 4 reservas en 2×2 y el préstamo debajo; reparten todo el alto disponible */
   main { flex:1; min-height:0; display:grid; gap:var(--buit); grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr 1.28fr; }
-  .targeta { container-type:size; min-height:0; border-radius:var(--radi); border:1px solid; padding:10px 12px 10px;
+  .targeta { container-type:size; min-height:0; border-radius:var(--radi); padding:10px 12px 10px;
     display:flex; flex-direction:column; justify-content:space-between; gap:4px; }
   .targeta.ample { grid-column:1 / -1; }
   .titol { font-weight:700; font-size:clamp(12px, 8.5cqw, 15px); letter-spacing:.8px; text-transform:uppercase; }
@@ -60,45 +61,45 @@
   .saldo.neg { color:var(--perill); }
   .fila { display:flex; align-items:center; justify-content:space-between; gap:6px; min-width:0; }
   /* Si el importe mensual es muy largo, se acorta con «…»; los botones nunca se salen de la tarjeta */
-  .xip { font-weight:600; color:var(--suau); background:rgba(255,255,255,.7); border:1px solid rgba(23,35,52,.08);
+  .xip { font-weight:600; color:var(--suau); background:rgba(255,255,255,.7);
     border-radius:999px; padding:4px 10px; font-size:clamp(12px, 8cqw, 15px); white-space:nowrap;
     min-width:0; overflow:hidden; text-overflow:ellipsis; flex:0 1 auto; }
   .accions { display:flex; gap:6px; flex:none; }
-  .accio { width:clamp(32px, 21cqw, 40px); height:clamp(32px, 21cqw, 40px); border-radius:50%; border:1.5px solid #c3d3ee; background:#fff; color:var(--primari);
+  .accio { border:0; width:clamp(32px, 21cqw, 40px); height:clamp(32px, 21cqw, 40px); border-radius:50%; background:#fff; color:var(--primari);
     display:grid; place-items:center; cursor:pointer; padding:0; transition:transform .08s, background .12s; }
   .accio:active { transform:scale(.92); background:#eaf1fe; }
   .accio svg { width:58%; height:58%; fill:currentColor; }
-  .barra-pr { height:10px; border-radius:6px; background:rgba(255,255,255,.75); border:1px solid rgba(23,35,52,.08); overflow:hidden; }
+  .barra-pr { height:10px; border-radius:6px; background:rgba(255,255,255,.75); overflow:hidden; }
   .barra-pr > i { display:block; height:100%; border-radius:6px; background:var(--primari); transition:width .4s; }
   .pr-info { display:flex; justify-content:space-between; font-size:clamp(11px, 3.4cqw, 13px); color:var(--suau); font-weight:600; }
   .pr-info b { color:var(--blau-titol); }
 
   /* Colores pastel, como las actividades de la agenda de Cuadern Docent */
-  .c-casa { background:#fdf3c9; border-color:#ecdc8c; }  .c-casa .titol { color:#7a6410; }
-  .c-cotxe { background:#fde5cf; border-color:#f1c79f; } .c-cotxe .titol { color:#9a5318; }
-  .c-vacances { background:#ece4fb; border-color:#d3c4f1; } .c-vacances .titol { color:#6a45a8; }
-  .c-estalvis { background:#dcf5e9; border-color:#a9e0c6; } .c-estalvis .titol { color:#16774f; }
-  .c-prestec { background:#e3f0fc; border-color:#b9d6f2; } .c-prestec .titol { color:#2a5298; }
+  .c-casa { background:#fdf3c9; }  .c-casa .titol { color:#7a6410; }
+  .c-cotxe { background:#fde5cf; } .c-cotxe .titol { color:#9a5318; }
+  .c-vacances { background:#ece4fb; } .c-vacances .titol { color:#6a45a8; }
+  .c-estalvis { background:#dcf5e9; } .c-estalvis .titol { color:#16774f; }
+  .c-prestec { background:#e3f0fc; } .c-prestec .titol { color:#2a5298; }
 
   /* Cuadro de entrada y menú */
   .fons { position:fixed; inset:0; background:rgba(23,35,52,.42); display:none; align-items:flex-end; justify-content:center; z-index:20; }
   .fons.on { display:flex; }
-  .full { background:#fff; width:100%; max-width:460px; border-radius:20px 20px 0 0; border:1px solid var(--vora); padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+  .full { background:#fff; width:100%; max-width:460px; border-radius:20px 20px 0 0; padding:18px 18px calc(18px + env(safe-area-inset-bottom));
     animation:puja .16s ease-out; }
   @media (min-width:600px) { .fons { align-items:center; } .full { border-radius:20px; } }
   @keyframes puja { from { transform:translateY(30px); opacity:.5; } to { transform:none; opacity:1; } }
   .full h3 { margin:0 0 12px; font-size:18px; color:var(--blau-titol); font-weight:700; }
-  .full input[type=text] { width:100%; font:inherit; font-weight:700; font-size:26px; padding:10px 14px; border:1px solid var(--vora); border-radius:12px; background:#f3f7fc;
+  .full input[type=text] { width:100%; font:inherit; font-weight:700; font-size:26px; padding:10px 14px; border:0; border-radius:12px; background:#f3f7fc;
     text-align:right; color:var(--text); }
-  .full input[type=text]:focus { outline:2px solid var(--primari); border-color:var(--primari); background:#fff; }
+  .full input[type=text]:focus { outline:2px solid var(--primari); background:#fff; }
   .error { color:var(--perill); min-height:20px; font-size:14px; margin:6px 0 0; font-weight:600; }
   .files { display:flex; gap:10px; margin-top:12px; }
-  .files button, .llista button { flex:1; padding:13px; border-radius:12px; border:1px solid var(--vora); background:#f0f5fd; color:var(--blau-titol); font-weight:700; font-size:16px; cursor:pointer; }
-  .files button.ok { background:var(--primari); color:#fff; border-color:var(--primari); }
+  .files button, .llista button { flex:1; padding:13px; border-radius:12px; border:0; background:#f0f5fd; color:var(--blau-titol); font-weight:700; font-size:16px; cursor:pointer; }
+  .files button.ok { background:var(--primari); color:#fff; }
   .files button.ok:active { background:var(--primari-fosc); }
   .llista { display:grid; gap:8px; }
   .llista button { text-align:left; display:flex; align-items:center; gap:12px; }
-  .llista button.perill { color:var(--perill); background:var(--perill-fons); border-color:#f3c9c6; }
+  .llista button.perill { color:var(--perill); background:var(--perill-fons); }
   .nota { color:var(--suau); font-size:13px; margin:10px 2px 0; line-height:1.4; font-weight:500; }
   #avis { position:fixed; left:12px; right:12px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:30; display:none; justify-content:center; }
   #avis.on { display:flex; }
