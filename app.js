@@ -256,6 +256,14 @@
   // Pide al navegador que no borre los datos si falta espacio
   if (navigator.storage && navigator.storage.persist) { navigator.storage.persist(); }
 
+  // Sin ampliar con pellizco ni doble toque (iOS Safari ignora el viewport y usa estos eventos)
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { e.preventDefault(); });
+  });
+  document.addEventListener('touchmove', function (e) {
+    if (e.touches.length > 1) { e.preventDefault(); }
+  }, { passive: false });
+
   // Funcionamiento sin conexión
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     var teniaControlador = !!navigator.serviceWorker.controller;

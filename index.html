@@ -2,7 +2,7 @@
 <html lang="ca">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#eef3f9">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,6 +31,8 @@
     background:linear-gradient(180deg, var(--bg), var(--bg2)); }
   button { font:inherit; color:inherit; }
   body { overflow:hidden; }
+  /* Sin zoom: ni pellizco ni doble toque; el texto tampoco se reescala solo */
+  html, body, button { touch-action:pan-x pan-y; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 
   /* La pantalla ocupa exactamente el alto del móvil: nada de desplazarse */
   #app { height:100vh; height:100dvh; max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:var(--buit);
