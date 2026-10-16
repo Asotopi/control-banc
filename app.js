@@ -215,7 +215,8 @@
   el('btnDesfer').onclick = desfer;
   el('avisDesfer').onclick = function () { el('avis').className = ''; desfer(); };
   el('btnMenu').onclick = abrirMenu;
-  el('mnTancar').onclick = cerrarMenu;
+  // El menú se cierra tocando fuera de él o con Escape (ya no hay botón «Tancar»)
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { cerrarMenu(); } });
   el('fonsMenu').onclick = function (e) { if (e.target === el('fonsMenu')) { cerrarMenu(); } };
   el('mnExportar').onclick = exportar;
   el('mnImportar').onclick = function () { el('fitxer').click(); };

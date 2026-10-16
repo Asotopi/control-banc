@@ -22,7 +22,7 @@
 
   :root {
     --bg:#eef3f9; --bg2:#f8fbff; --panel:rgba(255,255,255,.94); --panel-fort:#e7eef8; --vora:#d3deec;
-    --text:#172334; --suau:#607086; --primari:#2f6fed; --primari-fosc:#245ad0; --blau-titol:#2a5298;
+    --text:#172334; --suau:#607086; --primari:#2f6fed; --primari-fosc:#245ad0; --blau-titol:#2a5298; --blau-suau:#6e9be0;
     --perill:#b42318; --perill-fons:#fff1f1;
     --radi:16px; --buit:10px;
   }
@@ -43,11 +43,11 @@
   .mes .nom { font-weight:700; font-size:clamp(17px, 5.4vw, 22px); letter-spacing:.3px; color:var(--blau-titol); line-height:1.1; }
   .mes small { display:block; font-weight:500; color:var(--suau); font-size:11.5px; margin-top:1px; }
   .mes .fletxa { flex:none; width:38px; height:38px; border-radius:12px; background:#d3e4fb; display:grid; place-items:center; }
-  .mes .fletxa svg { width:22px; height:22px; fill:var(--primari); }
+  .mes .fletxa svg { width:22px; height:22px; fill:var(--blau-suau); }
   .mes:active .fletxa { background:#c2d8f8; }
   .icona-cap { border:0; flex:none; width:48px; border-radius:var(--radi); background:var(--panel); display:grid; place-items:center; cursor:pointer; }
   .icona-cap:active { background:var(--panel-fort); }
-  .icona-cap svg { width:22px; height:22px; fill:var(--blau-titol); }
+  .icona-cap svg { width:22px; height:22px; fill:var(--blau-suau); }
 
   /* Cuadrícula: 4 reservas en 2×2 y el préstamo debajo; reparten todo el alto disponible */
   main { flex:1; min-height:0; display:grid; gap:var(--buit); grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr 1.28fr; }
@@ -65,12 +65,12 @@
     border-radius:999px; padding:4px 10px; font-size:clamp(12px, 8cqw, 15px); white-space:nowrap;
     min-width:0; overflow:hidden; text-overflow:ellipsis; flex:0 1 auto; }
   .accions { display:flex; gap:6px; flex:none; }
-  .accio { border:0; width:clamp(32px, 21cqw, 40px); height:clamp(32px, 21cqw, 40px); border-radius:50%; background:#fff; color:var(--primari);
+  .accio { border:0; width:clamp(32px, 21cqw, 40px); height:clamp(32px, 21cqw, 40px); border-radius:50%; background:#fff; color:var(--blau-suau);
     display:grid; place-items:center; cursor:pointer; padding:0; transition:transform .08s, background .12s; }
-  .accio:active { transform:scale(.92); background:#eaf1fe; }
+  .accio:active { transform:scale(.92); background:#f0f5fd; }
   .accio svg { width:58%; height:58%; fill:currentColor; }
   .barra-pr { height:10px; border-radius:6px; background:rgba(255,255,255,.75); overflow:hidden; }
-  .barra-pr > i { display:block; height:100%; border-radius:6px; background:var(--primari); transition:width .4s; }
+  .barra-pr > i { display:block; height:100%; border-radius:6px; background:#8fb2ea; transition:width .4s; }
   .pr-info { display:flex; justify-content:space-between; font-size:clamp(11px, 3.4cqw, 13px); color:var(--suau); font-weight:600; }
   .pr-info b { color:var(--blau-titol); }
 
@@ -91,15 +91,21 @@
   .full h3 { margin:0 0 12px; font-size:18px; color:var(--blau-titol); font-weight:700; }
   .full input[type=text] { width:100%; font:inherit; font-weight:700; font-size:26px; padding:10px 14px; border:0; border-radius:12px; background:#f3f7fc;
     text-align:right; color:var(--text); }
-  .full input[type=text]:focus { outline:2px solid var(--primari); background:#fff; }
+  .full input[type=text]:focus { outline:2px solid var(--blau-suau); background:#fff; }
   .error { color:var(--perill); min-height:20px; font-size:14px; margin:6px 0 0; font-weight:600; }
   .files { display:flex; gap:10px; margin-top:12px; }
   .files button, .llista button { flex:1; padding:13px; border-radius:12px; border:0; background:#f0f5fd; color:var(--blau-titol); font-weight:700; font-size:16px; cursor:pointer; }
-  .files button.ok { background:var(--primari); color:#fff; }
-  .files button.ok:active { background:var(--primari-fosc); }
+  .files button { color:var(--suau); }
+  .files button.ok { background:#cfe0fb; color:var(--blau-titol); }
+  .files button.ok:active { background:#bcd3f7; }
   .llista { display:grid; gap:8px; }
-  .llista button { text-align:left; display:flex; align-items:center; gap:12px; }
-  .llista button.perill { color:var(--perill); background:var(--perill-fons); }
+  .llista button { text-align:left; display:flex; align-items:center; gap:12px; background:#f6f9fd; color:var(--text); padding:9px 12px; }
+  .llista button:active { background:#eaf1fb; }
+  .llista .ic { flex:none; width:38px; height:38px; border-radius:50%; display:grid; place-items:center; }
+  .llista .ic svg { width:20px; height:20px; fill:currentColor; }
+  .ic-blau { background:#dbe8fb; color:#6e9be0; } .ic-verd { background:#dcf5e9; color:#5fb28b; }
+  .ic-lila { background:#ece4fb; color:#9a80cf; } .ic-rosa { background:#fde4e4; color:#d9807a; }
+  .llista button.perill { color:#b9544d; background:#fff4f3; }
   .nota { color:var(--suau); font-size:13px; margin:10px 2px 0; line-height:1.4; font-weight:500; }
   #avis { position:fixed; left:12px; right:12px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:30; display:none; justify-content:center; }
   #avis.on { display:flex; }
@@ -136,13 +142,12 @@
 <div class="fons" id="fonsMenu"><div class="full" role="dialog" aria-modal="true">
   <h3>Menú</h3>
   <div class="llista">
-    <button id="mnExportar">⬇ Fer còpia de seguretat</button>
-    <button id="mnImportar">⬆ Restaurar una còpia</button>
-    <button id="mnPrestec">⚙ Canviar l'import total del préstec</button>
-    <button id="mnEsborrar" class="perill">🗑 Esborrar totes les dades</button>
-    <button id="mnTancar">Tancar</button>
+    <button id="mnExportar"><span class="ic ic-blau"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></span><span>Fer còpia de seguretat</span></button>
+    <button id="mnImportar"><span class="ic ic-verd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg></span><span>Restaurar una còpia</span></button>
+    <button id="mnPrestec"><span class="ic ic-lila"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg></span><span>Canviar l'import total del préstec</span></button>
+    <button id="mnEsborrar" class="perill"><span class="ic ic-rosa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span><span>Esborrar totes les dades</span></button>
   </div>
-  <p class="nota">Les dades es guarden només en aquest telèfon. Fes còpies de seguretat de tant en tant.</p>
+  <p class="nota">Les dades es guarden només en aquest telèfon. Fes còpies de seguretat de tant en tant. Toca fora del quadre per tancar.</p>
   <input type="file" id="fitxer" accept="application/json,.json" hidden>
 </div></div>
 
