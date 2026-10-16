@@ -7,8 +7,6 @@
 
   // ---------- Iconos (propios, SVG) ----------
   var ICONOS = {
-    plus: '<path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/>',
-    minus: '<path d="M5 11h14v2H5z"/>',
     refresh: '<path d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>',
     info: '<path d="M11 7h2v2h-2zm0 4h2v6h-2z"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>',
     monedes: '<path d="M12 3C7 3 4 4.6 4 6.5v11C4 19.4 7 21 12 21s8-1.6 8-3.5v-11C20 4.6 17 3 12 3zm0 2c3.9 0 6 .9 6 1.5S15.9 8 12 8 6 7.1 6 6.5 8.1 5 12 5zm6 12.5c0 .6-2.1 1.5-6 1.5s-6-.9-6-1.5v-2.2c1.4.8 3.6 1.2 6 1.2s4.6-.4 6-1.2v2.2zm0-4.5c0 .6-2.1 1.5-6 1.5s-6-.9-6-1.5v-2c1.4.8 3.6 1.2 6 1.2s4.6-.4 6-1.2v2zm0-4.5c0 .6-2.1 1.5-6 1.5s-6-.9-6-1.5V8.5C7.4 9.3 9.6 9.7 12 9.7s4.6-.4 6-1.2v2z"/>'
@@ -16,17 +14,14 @@
   function icono(nombre) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[nombre] + '</svg>'; }
 
   // ---------- Qué tarjetas se muestran ----------
-  // acciones: [nombre de la macro, icono, clase, etiqueta]
-  // Solo se muestran estas cinco. BBVA, BBVA-ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche
-  // siguen existiendo en los datos (no se pierde nada) pero ya no aparecen.
+  // acciones: [nombre de la macro, icono, etiqueta]. Las cuatro reservas son idénticas (↻ + importe mensual ℹ).
+  // BBVA, BBVA-ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche siguen en los datos pero no se muestran.
   var TARJETAS = [
-    { seccion: 'Reserves' },
-    { id: 'casa', titulo: 'CASA', color: '#B5A52F', saldo: 'casa', acciones: [['ResetCasa', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoCasa', 'casa'] },
-    { id: 'cotxe', titulo: 'COTXE', color: '#C9784A', saldo: 'cotxe', acciones: [['ResetCotxeSeguro', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoCotxeSeguro', 'cotxe'] },
-    { id: 'vacances', titulo: 'VACANCES', color: '#9F6BA8', saldo: 'vacances', acciones: [['ResetVacances', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoVacances', 'vacances'] },
-    { id: 'estalvis', titulo: 'ESTALVIS', color: '#2E8B57', saldo: 'ahorros', acciones: [['SumaAhorros', 'plus', 'mes-mes', 'Afegir estalvis'], ['ResetAhorros', 'refresh', 'refresca', 'Actualitzar saldo']], mensual: ['InfoAhorros', 'ahorros'] },
-    { seccion: 'Préstec' },
-    { id: 'prestec', tipo: 'prestec', color: '#747474', acciones: [['Amortitzar', 'monedes', 'monedes', 'Amortitzar préstec']], mensual: ['InfoPrestec', 'prestec'] }
+    { id: 'casa', titulo: 'CASA', clase: 'c-casa', saldo: 'casa', acciones: [['ResetCasa', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCasa', 'casa'] },
+    { id: 'cotxe', titulo: 'COTXE', clase: 'c-cotxe', saldo: 'cotxe', acciones: [['ResetCotxeSeguro', 'refresh', 'Actualitzar saldo']], mensual: ['InfoCotxeSeguro', 'cotxe'] },
+    { id: 'vacances', titulo: 'VACANCES', clase: 'c-vacances', saldo: 'vacances', acciones: [['ResetVacances', 'refresh', 'Actualitzar saldo']], mensual: ['InfoVacances', 'vacances'] },
+    { id: 'estalvis', titulo: 'ESTALVIS', clase: 'c-estalvis', saldo: 'ahorros', acciones: [['ResetAhorros', 'refresh', 'Actualitzar saldo']], mensual: ['InfoAhorros', 'ahorros'] },
+    { id: 'prestec', tipo: 'prestec', titulo: 'PRÉSTEC', clase: 'c-prestec ample', acciones: [['Amortitzar', 'monedes', 'Amortitzar préstec']], mensual: ['InfoPrestec', 'prestec'] }
   ];
 
   // ---------- Estado y almacenamiento ----------
@@ -51,37 +46,34 @@
   function el(id) { return document.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  function botones(t) {
-    return t.acciones.map(function (a) {
-      return '<button class="accio ' + a[2] + '" data-accion="' + a[0] + '" aria-label="' + esc(a[3]) + '" title="' + esc(a[3]) + '">' + icono(a[1]) + '</button>';
-    }).join('');
+  function boton(nombre, icon, etiqueta) {
+    return '<button class="accio" data-accion="' + nombre + '" aria-label="' + esc(etiqueta) + '" title="' + esc(etiqueta) + '">' + icono(icon) + '</button>';
   }
-  function mensual(t, v) {
-    if (!t.mensual) { return ''; }
-    return '<div class="mensual"><span class="xip" data-xip="' + t.mensual[1] + '">' + esc(L.importe(v.importes[t.mensual[1]])) + '</span>' +
-      '<button class="accio info" data-accion="' + t.mensual[0] + '" aria-label="Definir import mensual" title="Import mensual">' + icono('info') + '</button></div>';
+  // Fila inferior: importe mensual a la izquierda; ℹ (mensual) y las acciones de la tarjeta a la derecha
+  function filaInferior(t, v) {
+    var xip = t.mensual ? '<span class="xip" title="Import mensual">' + esc(L.importe(v.importes[t.mensual[1]])) + '</span>' : '<span></span>';
+    var b = '';
+    if (t.mensual) { b += boton(t.mensual[0], 'info', 'Definir import mensual'); }
+    t.acciones.forEach(function (a) { b += boton(a[0], a[1], a[2]); });
+    return '<div class="fila">' + xip + '<div class="accions">' + b + '</div></div>';
   }
   function tarjeta(t, v) {
     if (t.tipo === 'prestec') {
       var pct = Math.max(0, Math.min(1, v.prestecPorcentaje));
-      return '<section class="targeta"><div class="titol" style="background:' + t.color + '">PRESTEC ' + esc(L.moneda(datos.estado.prestecTotal).replace(',00', '')) + '</div><div class="cos">' +
+      return '<section class="targeta ' + t.clase + '"><div class="titol">PRÉSTEC ' + esc(L.moneda(datos.estado.prestecTotal).replace(',00', '')) + '</div>' +
         '<div class="saldo' + (v.prestecRestante < 0 ? ' neg' : '') + '">' + esc(L.moneda(v.prestecRestante)) + '</div>' +
-        '<div class="barra"><i style="width:' + (pct * 100).toFixed(1) + '%"></i></div>' +
-        '<div class="pct">' + L.porcentaje(v.prestecPorcentaje) + ' amortitzat</div>' +
-        '<div class="pagat">Pagat fins ara: ' + esc(L.moneda(v.prestecPagado + L.num(datos.estado.datos.B13))) + '</div>' +
-        '<div class="accions">' + botones(t) + '</div>' + mensual(t, v) + '</div></section>';
+        '<div class="barra-pr"><i style="width:' + (pct * 100).toFixed(1) + '%"></i></div>' +
+        '<div class="pr-info"><b>' + L.porcentaje(v.prestecPorcentaje) + ' amortitzat</b><span>Pagat ' + esc(L.moneda(v.prestecPagado + L.num(datos.estado.datos.B13))) + '</span></div>' +
+        filaInferior(t, v) + '</section>';
     }
     var s = v[t.saldo];
-    return '<section class="targeta"><div class="titol" style="background:' + t.color + '">' + esc(t.titulo) + '</div><div class="cos">' +
-      '<div class="saldo' + (s < 0 ? ' neg' : '') + '">' + esc(L.moneda(s)) + '</div>' +
-      '<div class="accions">' + botones(t) + '</div>' + mensual(t, v) + '</div></section>';
+    return '<section class="targeta ' + t.clase + '"><div class="titol">' + esc(t.titulo) + '</div>' +
+      '<div class="saldo' + (s < 0 ? ' neg' : '') + '">' + esc(L.moneda(s)) + '</div>' + filaInferior(t, v) + '</section>';
   }
   function pintar() {
     var v = L.calcular(datos.estado, new Date().getFullYear());
     el('titolMes').textContent = v.titulo;
-    var h = '';
-    TARJETAS.forEach(function (t) { h += t.seccion ? '<h2 class="seccio">' + t.seccion + '</h2>' : tarjeta(t, v); });
-    el('panell').innerHTML = h;
+    el('panell').innerHTML = TARJETAS.map(function (t) { return tarjeta(t, v); }).join('');
     el('btnDesfer').style.opacity = datos.historial.length ? 1 : .4;
   }
 
@@ -100,6 +92,7 @@
   function pedirNumero(titulo) {
     return new Promise(function (resolve) {
       var fondo = el('fonsEntrada'), inp = el('entradaInput'), err = el('entradaError');
+      el('avis').className = '';   // el aviso de abajo no debe tapar los botones del cuadro
       el('entradaTitol').textContent = titulo; inp.value = ''; err.textContent = '';
       fondo.classList.add('on'); setTimeout(function () { inp.focus(); }, 60);
       function cerrar(v) {
@@ -121,10 +114,8 @@
   // Texto legible de cada acción para los avisos: «ESTALVIS · Actualitzar saldo»
   var NOMBRES = {};
   TARJETAS.forEach(function (t) {
-    if (!t.acciones) { return; }
-    var titulo = t.titulo || 'PRÉSTEC';
-    t.acciones.forEach(function (a) { NOMBRES[a[0]] = titulo + ' · ' + a[3]; });
-    if (t.mensual) { NOMBRES[t.mensual[0]] = titulo + ' · import mensual'; }
+    t.acciones.forEach(function (a) { NOMBRES[a[0]] = t.titulo + ' · ' + a[2]; });
+    if (t.mensual) { NOMBRES[t.mensual[0]] = t.titulo + ' · import mensual'; }
   });
   function etiqueta(nombre, valor) {
     var base = nombre === 'BotonMes' ? 'Mes següent' : (NOMBRES[nombre] || nombre);
@@ -156,7 +147,7 @@
   }
 
   // ---------- Menú: copias, préstamo, borrar ----------
-  function abrirMenu() { el('fonsMenu').classList.add('on'); }
+  function abrirMenu() { el('avis').className = ''; el('fonsMenu').classList.add('on'); }
   function cerrarMenu() { el('fonsMenu').classList.remove('on'); }
 
   function exportar() {

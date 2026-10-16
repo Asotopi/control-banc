@@ -3,8 +3,11 @@
 Basada en tu Excel **CONTROL - BANC**. Muestra cinco tarjetas: **CASA, COTXE, VACANCES, ESTALVIS** y el
 **PRESTEC de 20.000 €**, con sus importes mensuales y el botón de pasar de mes. **Los datos viven solo en tu móvil.**
 
-- **ESTALVIS** es nuevo (no está en el Excel): empieza en 0, tiene botón **+** y **↻** y un importe mensual que se
-  suma solo al pasar de mes.
+- **ESTALVIS** es nuevo (no está en el Excel) y funciona igual que CASA, COTXE y VACANCES: empieza en 0,
+  se actualiza con **↻** y tiene un importe mensual (**ℹ**) que se suma solo al pasar de mes.
+- **Todo cabe en una pantalla**, sin desplazarse, desde móviles pequeños (320×568) hasta grandes. La estética
+  (tipografía Quicksand, fondo azul claro, tarjetas pastel planas) sigue la de Cuadern Docent. La tipografía
+  Quicksand es de licencia abierta SIL OFL y va incluida en la carpeta `fonts`.
 - BBVA, BBVA - ESTALVIS, Sabadell, Openbank, IBI y la revisión del coche ya **no se muestran**. Sus datos siguen
   guardados por dentro (no se pierde nada), pero no se pueden ver ni editar desde la app.
 

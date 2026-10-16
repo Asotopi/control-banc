@@ -1,6 +1,7 @@
 /* Modo sin conexión: guarda los archivos de la app y los sirve aunque no haya Internet. */
-const VERSION = 'controlbanc-v2';
-const ARCHIVOS = ['./', 'index.html', 'logic.js', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
+const VERSION = 'controlbanc-v3';
+const ARCHIVOS = ['./', 'index.html', 'logic.js', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png',
+  'fonts/quicksand-latin-d8da43.woff2', 'fonts/quicksand-latin-ext-9d611e.woff2'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(ARCHIVOS)).then(() => self.skipWaiting()));
